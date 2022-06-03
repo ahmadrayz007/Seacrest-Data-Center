@@ -12,6 +12,7 @@ import "leaflet/dist/leaflet.css";
 import { ref } from "vue";
 
 import { useStorePoint } from "@/stores/storePoint.js";
+import Icon from "@/assets/seagrass-icon.png";
 
 const storePoint = useStorePoint();
 
@@ -20,6 +21,8 @@ const storePoint = useStorePoint();
 const iconSize = ref([25, 16]);
 
 const today = storePoint.today;
+
+const icon = Icon
 
 // const lat_lng = [
 //   {
@@ -57,7 +60,7 @@ console.log(storePoint.point)
         :lat-lng="[item.lat, item.long]"
         v-show="item.approve"
       >
-        <l-icon icon-url="@/assets/seagrass-icon.png" :iconSize="iconSize" />
+        <l-icon :icon-url="icon" :iconSize="iconSize" />
 
         <l-popup>
           <img class="img_leaflet" src="@/assets/lamun.jpg" alt="" />
