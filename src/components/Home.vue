@@ -57,7 +57,7 @@ console.log(storePoint.point)
         :lat-lng="[item.lat, item.long]"
         v-show="item.approve"
       >
-        <l-icon icon-url="src/assets/seagrass-icon.png" :iconSize="iconSize" />
+        <l-icon icon-url="@/assets/seagrass-icon.png" :iconSize="iconSize" />
 
         <l-popup>
           <img class="img_leaflet" src="@/assets/lamun.jpg" alt="" />
