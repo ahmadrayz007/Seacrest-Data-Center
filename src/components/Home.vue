@@ -76,7 +76,7 @@ const icon = Icon;
   <div
     class="fixed bottom-0 left-0 w-auto md:bottom-6 md:left-4 bg-white md:rounded-md text-5xl"
   >
-    <h1>Apa ini!?</h1>
+    <h1>Apa ini!??</h1>
   </div>
 </template>
 
