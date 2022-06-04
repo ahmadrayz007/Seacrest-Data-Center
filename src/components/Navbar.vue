@@ -69,7 +69,6 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 
 const navigation = [
   { name: 'Maps', href: '/', current: false },
-  { name: 'Playground', href: '/playground', current: false },
   { name: 'Input Data', href: '/input', current: false },
 ]
 </script>

@@ -15,21 +15,15 @@ const location = ref("");
 const latitude = ref("");
 const longitude = ref("");
 
-const discoverer = first_name.value
-
-
-let dataForm = [{
-  discoverer: `${first_name.value} ${last_name.value}`,
-  species: seagrass_species.value,
-  location: location.value,
-  date: storePoint.today,
-  lat: latitude.value,
-  long: longitude.value,
-}]
-
 const addPoint = () => {
   storePoint.addPoint(latitude.value, longitude.value, seagrass_species.value, location.value, first_name.value);
   console.log(storePoint.point);
+  first_name.value = "";
+  last_name.value = "";
+  seagrass_species.value = "";
+  location.value = "";
+  latitude.value = "";
+  longitude.value = "";
 
 };
 
@@ -163,6 +157,5 @@ const addPoint = () => {
         Submit
       </button>
     </form>
-    {{ first_name }}
   </div>
 </template>

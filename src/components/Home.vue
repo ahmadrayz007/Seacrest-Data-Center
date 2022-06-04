@@ -22,7 +22,7 @@ const iconSize = ref([25, 16]);
 
 const today = storePoint.today;
 
-const icon = Icon
+const icon = Icon;
 
 // const lat_lng = [
 //   {
@@ -38,17 +38,14 @@ const icon = Icon
 //     message: "Lamun 2",
 //   },
 // ];
-
-console.log(storePoint.point)
 </script>
 
 <template>
-  <div class="relative z-0 h-[calc(100vh-64px)]">
+  <div>
     <l-map
-      v-for="item in storePoint.point"
-      :key="item.id"
-      :zoom="12"
-      :center="[-6.9032739, 107.5729448]"
+      style="height: 100vh;position: relative;z-index: 0;"
+      :zoom="5"
+      :center="[-3.7506647, 117.234634]"
       :options="{ zoomControl: false }"
     >
       <l-tile-layer
@@ -58,7 +55,7 @@ console.log(storePoint.point)
         v-for="item in storePoint.point"
         :key="item.id"
         :lat-lng="[item.lat, item.long]"
-        v-show="item.approve"
+        :visible="item.approve"
       >
         <l-icon :icon-url="icon" :iconSize="iconSize" />
 
@@ -102,5 +99,6 @@ p {
 .leaflet-popup-content {
   width: 180px !important;
   text-align: left;
+  z-index: 0;
 }
 </style>
