@@ -22,7 +22,7 @@ const iconSize = ref([25, 16]);
 
 const today = storePoint.today;
 
-const icon = Icon;
+const icon = Icon
 
 // const lat_lng = [
 //   {
@@ -38,12 +38,12 @@ const icon = Icon;
 //     message: "Lamun 2",
 //   },
 // ];
+
 </script>
 
 <template>
-  <div>
+  <div class="relative z-0 h-[calc(100vh-64px)]">
     <l-map
-      style="height: 100vh;position: relative;z-index: 0;"
       :zoom="5"
       :center="[-3.7506647, 117.234634]"
       :options="{ zoomControl: false }"
@@ -76,7 +76,7 @@ const icon = Icon;
   <div
     class="fixed bottom-0 left-0 w-auto md:bottom-6 md:left-4 bg-white md:rounded-md text-5xl"
   >
-    <h1>Apa ini!??</h1>
+    <h1>Apa ini!?</h1>
   </div>
 </template>
 
@@ -99,6 +99,5 @@ p {
 .leaflet-popup-content {
   width: 180px !important;
   text-align: left;
-  z-index: 0;
 }
 </style>
