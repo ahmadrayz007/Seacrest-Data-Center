@@ -7,11 +7,13 @@ import {
   LPopup,
   LControlZoom,
   LIcon,
+  LControlLayers,
 } from "@vue-leaflet/vue-leaflet";
 import "leaflet/dist/leaflet.css";
 import { ref } from "vue";
 
 import { useStorePoint } from "@/stores/storePoint.js";
+
 import Icon from "@/assets/seagrass-icon.png";
 
 const storePoint = useStorePoint();
@@ -22,7 +24,7 @@ const iconSize = ref([25, 16]);
 
 const today = storePoint.today;
 
-const icon = Icon
+const icon = Icon;
 
 // const lat_lng = [
 //   {
@@ -39,17 +41,59 @@ const icon = Icon
 //   },
 // ];
 
+const clickMarker = (e) => {
+  console.log(e.latlng);
+  this.map.mapObject.fitBounds(
+    this.markers.map((m) => {
+      return [m.lat, m.lng];
+    })
+  );
+};
+
+const tileLayers = [
+  {
+    name: "Carto Voyager",
+    url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    visible: true,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  },
+  {
+    name: "Carto Positron",
+    url: "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png",
+    visible: false,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  },
+  {
+    name: "Esri World Imagery",
+    url:
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    visible: false,
+    attribution:
+      "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
+  },
+];
 </script>
 
 <template>
   <div class="relative z-0 h-[calc(100vh-64px)]">
     <l-map
+      ref="map"
       :zoom="5"
       :center="[-3.7506647, 117.234634]"
       :options="{ zoomControl: false }"
     >
+      <l-control-layers />
+
       <l-tile-layer
-        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        v-for="tileLayer in tileLayers"
+        :key="tileLayer.name"
+        :url="tileLayer.url"
+        :attribution="tileLayer.attribution"
+        :visible="tileLayer.visible"
+        :name="tileLayer.name"
+        layer-type="base"
       ></l-tile-layer>
       <l-marker
         v-for="item in storePoint.point"
