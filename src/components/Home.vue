@@ -1,5 +1,5 @@
 <script setup>
-// Imports
+// Imports 
 import {
   LMap,
   LTileLayer,
@@ -12,11 +12,16 @@ import {
 import "leaflet/dist/leaflet.css";
 import { ref } from "vue";
 
+// Store imports
 import { useStorePoint } from "@/stores/storePoint.js";
+import { useStoreTileLayers } from "../stores/storeTileLayers";
 
+//import images
 import Icon from "@/assets/seagrass-icon.png";
 
+//use stores
 const storePoint = useStorePoint();
+const storeTileLayers = useStoreTileLayers();
 
 //scripts
 
@@ -24,22 +29,7 @@ const iconSize = ref([25, 16]);
 
 const today = storePoint.today;
 
-const icon = Icon;
-
-// const lat_lng = [
-//   {
-//     id: 1,
-//     lat: -6.9032739,
-//     long: 107.5729448,
-//     message: "Lamun 1",
-//   },
-//   {
-//     id: 2,
-//     lat: -6.9177936,
-//     long: 107.642921,
-//     message: "Lamun 2",
-//   },
-// ];
+const icon = Icon;s
 
 const clickMarker = (e) => {
   console.log(e.latlng);
@@ -50,30 +40,6 @@ const clickMarker = (e) => {
   );
 };
 
-const tileLayers = [
-  {
-    name: "Carto Voyager",
-    url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-    visible: true,
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  },
-  {
-    name: "Carto Positron",
-    url: "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png",
-    visible: false,
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  },
-  {
-    name: "Esri World Imagery",
-    url:
-      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    visible: false,
-    attribution:
-      "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
-  },
-];
 </script>
 
 <template>
@@ -87,7 +53,7 @@ const tileLayers = [
       <l-control-layers />
 
       <l-tile-layer
-        v-for="tileLayer in tileLayers"
+        v-for="tileLayer in storeTileLayers.tileLayers"
         :key="tileLayer.name"
         :url="tileLayer.url"
         :attribution="tileLayer.attribution"
