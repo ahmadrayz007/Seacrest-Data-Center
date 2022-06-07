@@ -29,7 +29,7 @@ const iconSize = ref([25, 16]);
 
 const today = storePoint.today;
 
-const icon = Icon;s
+const icon = Icon;
 
 const clickMarker = (e) => {
   console.log(e.latlng);
